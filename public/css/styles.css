@@ -36,8 +36,8 @@ form {
   font-size: 16px;
 }
 
-#completeButton:active {
-  color: #21f75d;
+#addTodoSubmit:active, #filterTodoSubmit:active, #completeButton:active {
+  color: #FFF;
 }
 
 ul {

@@ -1,0 +1,22 @@
+[
+  {
+    "text": "walk dog",
+    "tag": "dog",
+    "completed": true
+  },
+  {
+    "text": "do homework",
+    "tag": "school",
+    "completed": false
+  },
+  {
+    "text": "make packed lunch",
+    "tag": "food",
+    "completed": true
+  },
+  {
+    "text": "make dinner",
+    "tag": "food",
+    "completed": false 
+  }
+]
