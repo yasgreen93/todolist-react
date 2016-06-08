@@ -47,7 +47,10 @@ var TodoList = React.createClass({
         {list.map(function(todo, index) {
           return (
             <div>
-              <li key={index}><strong>Todo:</strong> {todo.text}, <strong>Tag:</strong> {todo.tag}, <strong>{checkCompleted(todo)}</strong> {<CompleteTodoButton completed={todo.completed} />}</li>
+              <li key={index}>
+                <strong>Todo:</strong> {todo.text}, <strong>Tag:</strong> {todo.tag}, <strong>{checkCompleted(todo)}</strong>
+                {<CompleteTodoButton completed={todo.completed} />}
+              </li>
             </div>
           );
         })}
