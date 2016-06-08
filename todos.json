@@ -17,6 +17,11 @@
   {
     "text": "make dinner",
     "tag": "food",
+    "completed": false
+  },
+  {
+    "text": "finish project",
+    "tag": "school",
     "completed": false 
   }
 ]

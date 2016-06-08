@@ -1,11 +1,31 @@
 var TodoListTable = React.createClass({
+  loadTodosFromServer: function() {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data})
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+  getInitialState: function() {
+    return {data: []};
+  },
+  componentDidMount: function() {
+    this.loadTodosFromServer();
+    setInterval(this.loadTodosFromServer, this.props.pollInterval);
+  },
   render: function() {
     return (
       <div className="TodoTable">
         <h2>Todo List!</h2>
         <AddTodo />
         <FilterTodo />
-        <TodoList todos={this.props.todos}/>
+        <TodoList todos={this.state.data}/>
       </div>
     );
   }
@@ -79,14 +99,7 @@ var CompleteButton = React.createClass({
   }
 });
 
-var TODOS = [
-  {text: "walk dog", tag: "dog", completed: true },
-  {text: "do homework", tag: "school", completed: false },
-  {text: "wmake packed lunch", tag: "food", completed: true },
-  {text: "make dinner", tag: "food", completed: false }
-];
-
 ReactDOM.render(
-  <TodoListTable todos={TODOS}/>,
+  <TodoListTable url="/api/todos" pollInterval={2000}/>,
   document.getElementById('container')
 );
