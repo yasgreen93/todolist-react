@@ -15,8 +15,8 @@ var AddTodo = React.createClass({
   render: function() {
     return (
       <form className="AddTodoForm">
-        <input type="text" placeholder="Add a Todo" />
-        <input type="submit" value="Add" />
+        <input id="addTodoText" type="text" placeholder="Add a Todo" />
+        <input id="addTodoSubmit" type="submit" value="Add" />
       </form>
     );
   }
@@ -26,8 +26,8 @@ var FilterTodo = React.createClass({
   render: function() {
     return (
       <form className="FilterTodoForm">
-        <input type="text" placeholder="Filter by a tag" />
-        <input type="submit" value="Filter" />
+        <input id="filterTodoText" type="text" placeholder="Filter by a tag" />
+        <input id="filterTodoSubmit" type="submit" value="Filter" />
       </form>
     );
   }
@@ -46,10 +46,10 @@ var TodoList = React.createClass({
       <ul className="Todos">
         {list.map(function(todo, index) {
           return (
-            <div>
+            <div id={index}>
               <li key={index}>
                 <strong>Todo:</strong> {todo.text}, <strong>Tag:</strong> {todo.tag}, <strong>{checkCompleted(todo)}</strong>
-                {<CompleteTodoButton completed={todo.completed} />}
+                {<CompleteTodoButton completed={todo.completed} id={index} />}
               </li>
             </div>
           );
@@ -64,8 +64,6 @@ var CompleteTodoButton = React.createClass({
     var button;
     if(this.props.completed === false) {
       button = <CompleteButton />;
-    } else {
-      button = null;
     }
     return (
       <span>
@@ -77,7 +75,7 @@ var CompleteTodoButton = React.createClass({
 
 var CompleteButton = React.createClass({
   render: function() {
-    return <input type="submit" value="Complete Todo" />;
+    return <input type="submit" value="Complete Todo" id="completeButton"/>;
   }
 });
 
