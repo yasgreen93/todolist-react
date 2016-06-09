@@ -31,11 +31,8 @@ var TodoListTable = React.createClass({
     });
   },
   handleTodoUpdate: function(id) {
-    console.log("called...");
     var todos = this.state.data;
-    // // var newTodos = todos.concat([todo]);
-    // // this.setState({data: newTodos});
-    $.ajax({
+     $.ajax({
       url: this.props.updateUrl,
       dataType: 'json',
       type: 'POST',
@@ -60,7 +57,7 @@ var TodoListTable = React.createClass({
   render: function() {
     return (
       <div className="TodoTable">
-        <h2>Todo List!</h2>
+        <h2 id="pageHeader">Todo List!</h2>
         <AddTodo onTodoSubmit={this.handleTodoSubmit} />
         <TodoList data={this.state.data} onTodoUpdate={this.handleTodoUpdate}/>
       </div>
@@ -75,9 +72,10 @@ var TodoList = React.createClass({
     this.props.data.forEach(function(todo) {
       list.push(todo);
     });
+    var reversedList = list.reverse();
     return (
       <ul className="Todos">
-        {list.map(function(todo) {
+        {reversedList.map(function(todo) {
           return (
             <SingleTodo todo={todo} onTodoUpdate={update}/>
           );
@@ -136,7 +134,7 @@ var AddTodo = React.createClass({
   },
   render: function() {
     return (
-      <form className="AddTodoForm" onSubmit={this.handleSubmit}>
+      <form className="AddTodoForm" onSubmit={this.handleSubmit} id="addTodoForm">
         <input
           id="addTodoText"
           type="text"

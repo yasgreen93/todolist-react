@@ -16,5 +16,23 @@
         "text": "do homework",
         "tag": "school",
         "completed": false
+    },
+    {
+        "id": 4,
+        "text": "make bed",
+        "tag": "chore",
+        "completed": false
+    },
+    {
+        "id": 5,
+        "text": "do washing",
+        "tag": "chores",
+        "completed": false
+    },
+    {
+        "id": 6,
+        "text": "feed dog",
+        "tag": "dog",
+        "completed": false
     }
 ]

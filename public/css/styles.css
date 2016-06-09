@@ -9,12 +9,32 @@ body {
   background-color: #c9e5ee;
 }
 
+#pageHeader {
+  color: #FF8500;
+  position: fixed;
+  top: 5px;
+  z-index: 1;
+}
+
 div {
   margin: 10px;
 }
 
+#addTodoForm {
+  position: fixed;
+  top: 55px;
+  z-index: 1;
+}
+
 form {
   margin: 10px 0px;
+}
+
+ul {
+  position: relative;
+  top: 95px;
+  padding-left: 0px;
+  z-index: 0;
 }
 
 li {
@@ -26,7 +46,7 @@ li {
   padding-left: 8px;
   margin: 10px 0px;
   color: #FFF;
-  max-width: 30%;
+  max-width: 250px;
   text-align: center;
 }
 
@@ -76,9 +96,4 @@ li {
 #addTodoSubmit:active,
 #completeButton:active {
   color: #FFF;
-}
-
-ul {
-  position: relative;
-  padding-left: 0px;
 }
