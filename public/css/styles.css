@@ -1,5 +1,6 @@
 body {
   font-family: Helvetica, sans-serif;
+  background-color: #c9e5ee;
 }
 
 div {
@@ -19,21 +20,31 @@ form {
   font-size: 14px;
   padding: 10px;
   margin-right: 8px;
+  border-radius: 3px;
+  border-style: hidden;
   color: #1eb3e9;
+}
+
+#addTodoText:focus,
+#filterTodoText:focus,
+#addTodoTag:focus,
+#addTodoSubmit:focus,
+#filterTodoSubmit:focus {
+  outline: none;
 }
 
 #addTodoSubmit, #filterTodoSubmit {
   width: 70px;
-  font-size: 18px;
+  height: 30px;
+  font-size: 16px;
+  border-style: hidden;
+  border-radius: 3px;
+  background-color: #FFF;
 }
 
 #addTodoSubmit:hover, #filterTodoSubmit:hover, #completeButton:hover {
-  color: #1eb3e9;
-}
-
-#completeButton {
-  width: 120px;
-  font-size: 16px;
+  background-color: #1eb3e9;
+  color: #FFF;
 }
 
 #addTodoSubmit:active, #filterTodoSubmit:active, #completeButton:active {
@@ -43,10 +54,9 @@ form {
 ul {
   position: relative;
   padding-left: 0px;
-  left: -10px;
 }
 
 li {
   list-style-type: none;
-  padding: 3px 0px;
+  padding: 7px 0px;
 }

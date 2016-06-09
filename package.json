@@ -12,6 +12,7 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
-    "react": "^15.1.0"
+    "react": "^15.1.0",
+    "react-draggable": "^2.1.2"
   }
 }

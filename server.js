@@ -38,7 +38,7 @@ app.post('/api/todos', function(req, res) {
     }
     var todos = JSON.parse(data);
     var newTodo = {
-      id: Date.now(),
+      id: todos.length + 1,
       text: req.body.text,
       tag: req.body.tag,
       completed: JSON.parse(req.body.completed)

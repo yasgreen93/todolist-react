@@ -57,9 +57,9 @@ var TodoList = React.createClass({
     });
     return (
       <ul className="Todos">
-        {list.map(function(todo, index) {
+        {list.map(function(todo) {
           return (
-            <SingleTodo idNum={index} todo={todo}/>
+            <SingleTodo idNum={todo.id} todo={todo}/>
           );
         })}
       </ul>
@@ -73,24 +73,22 @@ var SingleTodo = React.createClass({
       return todo.completed === true ? "Completed!" : "Not completed...";
     };
     var todo = this.props.todo;
-    var key = this.props.idNum;
     return (
-      <div id={key}>
-        <li key={key}>
-          <strong>Todo:</strong> {todo.text}, <strong>Tag:</strong> {todo.tag}, <strong>{checkCompleted(todo)}</strong>
-          {<CompleteTodoButton completed={todo.completed} id={key} />}
+        <li key={todo.id}>
+          {<CompleteTodoCheckbox todo={todo} />} <strong>Todo:</strong> {todo.text}, <strong>Tag:</strong> {todo.tag}, <strong>{checkCompleted(todo)}</strong>
         </li>
-      </div>
-
     );
   }
 });
 
-var CompleteTodoButton = React.createClass({
+var CompleteTodoCheckbox = React.createClass({
   render: function() {
     var button;
-    if(this.props.completed === false) {
-      button = <CompleteButton />;
+    var todo = this.props.todo;
+    var completed = todo.completed;
+    var id = todo.id;
+    if(completed === false) {
+      button = <CompleteCheckbox todo={todo}/>;
     }
     return (
       <span>
@@ -100,9 +98,24 @@ var CompleteTodoButton = React.createClass({
   }
 });
 
-var CompleteButton = React.createClass({
+var CompleteCheckbox = React.createClass({
+  getInitialState: function() {
+    return { complete: (!!this.props.complete) || false };
+  },
+  handleChange: function() {
+    this.setState({complete: !this.state.complete})
+  },
   render: function() {
-    return <input type="submit" value="Complete Todo" id="completeButton"/>;
+    var todoStyle={'text-decoration': this.state.complete ? 'line-through' : ''};
+    var todo = this.props.todo;
+    var id = todo.id;
+    return <input
+              type="checkbox"
+              value={id}
+              id={id}
+              defaultChecked={this.props.complete}
+              onChange={this.handleChange}
+            />;
   }
 });
 

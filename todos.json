@@ -1,26 +1,20 @@
 [
     {
-        "id": 1465473231835,
-        "text": "feed dog",
-        "tag": "dog",
-        "completed": false
+        "id": 1,
+        "text": "put bins out",
+        "tag": "chores",
+        "completed": true
     },
     {
-        "id": 1465473363662,
+        "id": 2,
         "text": "walk dog",
         "tag": "dog",
         "completed": false
     },
     {
-        "id": 1465473421890,
-        "text": "make lunch",
-        "tag": "food",
-        "completed": false
-    },
-    {
-        "id": 1465473440006,
-        "text": "go to gym",
-        "tag": "sports",
+        "id": 3,
+        "text": "do homework",
+        "tag": "school",
         "completed": false
     }
 ]
