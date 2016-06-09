@@ -12,6 +12,24 @@ var TodoListTable = React.createClass({
       }.bind(this)
     });
   },
+  handleTodoSubmit: function(todo) {
+    var todos = this.state.data;
+    var newTodos = todos.concat([todo]);
+    this.setState({data: newTodos});
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      type: 'POST',
+      data: todo,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        this.setState({data: todos});
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
   getInitialState: function() {
     return {data: []};
   },
@@ -23,32 +41,10 @@ var TodoListTable = React.createClass({
     return (
       <div className="TodoTable">
         <h2>Todo List!</h2>
-        <AddTodo />
+        <AddTodo onTodoSubmit={this.handleTodoSubmit}/>
         <FilterTodo />
-        <TodoList todos={this.state.data}/>
+        <TodoList data={this.state.data}/>
       </div>
-    );
-  }
-});
-
-var AddTodo = React.createClass({
-  render: function() {
-    return (
-      <form className="AddTodoForm">
-        <input id="addTodoText" type="text" placeholder="Add a Todo" />
-        <input id="addTodoSubmit" type="submit" value="Add" />
-      </form>
-    );
-  }
-});
-
-var FilterTodo = React.createClass({
-  render: function() {
-    return (
-      <form className="FilterTodoForm">
-        <input id="filterTodoText" type="text" placeholder="Filter by a tag" />
-        <input id="filterTodoSubmit" type="submit" value="Filter" />
-      </form>
     );
   }
 });
@@ -56,7 +52,7 @@ var FilterTodo = React.createClass({
 var TodoList = React.createClass({
   render: function() {
     var list = [];
-    this.props.todos.forEach(function(todo) {
+    this.props.data.forEach(function(todo) {
       list.push(todo);
     });
     return (
@@ -107,6 +103,61 @@ var CompleteTodoButton = React.createClass({
 var CompleteButton = React.createClass({
   render: function() {
     return <input type="submit" value="Complete Todo" id="completeButton"/>;
+  }
+});
+
+var AddTodo = React.createClass({
+  getInitialState: function() {
+    return {text: '', tag: '', completed: false};
+  },
+  handleTextChange: function(e) {
+    this.setState({text: e.target.value});
+  },
+  handleTagChange: function(e) {
+    this.setState({tag: e.target.value});
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var text = this.state.text.trim();
+    var tag = this.state.tag.trim();
+    var completed = false;
+    if(!text || !tag) {
+      return;
+    }
+    this.props.onTodoSubmit({text: text, tag: tag, completed: completed});
+    this.setState({text: '', tag: ''});
+  },
+  render: function() {
+    return (
+      <form className="AddTodoForm" onSubmit={this.handleSubmit}>
+        <input
+          id="addTodoText"
+          type="text"
+          placeholder="Add a Todo"
+          value={this.state.text}
+          onChange={this.handleTextChange}
+        />
+        <input
+          id="addTodoTag"
+          type="text"
+          placeholder="Tag your Todo"
+          value={this.state.tag}
+          onChange={this.handleTagChange}
+        />
+        <input id="addTodoSubmit" type="submit" value="Add" />
+      </form>
+    );
+  }
+});
+
+var FilterTodo = React.createClass({
+  render: function() {
+    return (
+      <form className="FilterTodoForm">
+        <input id="filterTodoText" type="text" placeholder="Filter by a tag" />
+        <input id="filterTodoSubmit" type="submit" value="Filter" />
+      </form>
+    );
   }
 });
 
