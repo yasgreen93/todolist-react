@@ -29,7 +29,8 @@ form {
 #filterTodoText:focus,
 #addTodoTag:focus,
 #addTodoSubmit:focus,
-#filterTodoSubmit:focus {
+#filterTodoSubmit:focus,
+#completeCheckbox:focus {
   outline: none;
 }
 

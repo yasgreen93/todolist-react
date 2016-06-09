@@ -59,7 +59,7 @@ var TodoList = React.createClass({
       <ul className="Todos">
         {list.map(function(todo) {
           return (
-            <SingleTodo idNum={todo.id} todo={todo}/>
+            <SingleTodo todo={todo}/>
           );
         })}
       </ul>
@@ -69,12 +69,15 @@ var TodoList = React.createClass({
 
 var SingleTodo = React.createClass({
   render: function() {
-    var checkCompleted = function(todo) {
-      return todo.completed === true ? "Completed!" : "Not completed...";
-    };
     var todo = this.props.todo;
+    var checkCompleted = function(todo) {
+      return todo.completed ? "Completed!" : "Not completed...";
+    };
+    var todoStyle = {
+      'textDecoration': todo.completed ? 'line-through' : ''
+    };
     return (
-        <li key={todo.id}>
+        <li key={todo.id} style={todoStyle}>
           {<CompleteTodoCheckbox todo={todo} />} <strong>Todo:</strong> {todo.text}, <strong>Tag:</strong> {todo.tag}, <strong>{checkCompleted(todo)}</strong>
         </li>
     );
@@ -86,7 +89,6 @@ var CompleteTodoCheckbox = React.createClass({
     var button;
     var todo = this.props.todo;
     var completed = todo.completed;
-    var id = todo.id;
     if(completed === false) {
       button = <CompleteCheckbox todo={todo}/>;
     }
@@ -100,7 +102,7 @@ var CompleteTodoCheckbox = React.createClass({
 
 var CompleteCheckbox = React.createClass({
   getInitialState: function() {
-    return { complete: (!!this.props.complete) || false };
+    return { complete: false };
   },
   handleChange: function() {
     this.setState({complete: !this.state.complete})
@@ -111,8 +113,9 @@ var CompleteCheckbox = React.createClass({
     var id = todo.id;
     return <input
               type="checkbox"
-              value={id}
-              id={id}
+              name={id}
+              value={this.state.complete}
+              id="completeCheckbox"
               defaultChecked={this.props.complete}
               onChange={this.handleChange}
             />;
