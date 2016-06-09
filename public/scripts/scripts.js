@@ -30,16 +30,16 @@ var TodoListTable = React.createClass({
       }.bind(this)
     });
   },
-  handleTodoUpdate: function(todo) {
+  handleTodoUpdate: function(id) {
     console.log("called...");
     var todos = this.state.data;
-    // var newTodos = todos.concat([todo]);
-    // this.setState({data: newTodos});
+    // // var newTodos = todos.concat([todo]);
+    // // this.setState({data: newTodos});
     $.ajax({
       url: this.props.updateUrl,
       dataType: 'json',
       type: 'POST',
-      data: todo,
+      data: id,
       success: function(data) {
         this.setState({data: data});
       }.bind(this),
@@ -176,26 +176,24 @@ var CompleteTodoButton = React.createClass({
 
 var CompleteButton = React.createClass({
   getInitialState: function() {
-    return {text: this.props.text, tag: this.props.tag, completed: this.props.completed};
+    return {id: this.props.id};
   },
   handleUpdate: function(e) {
     e.preventDefault();
-    var completed = this.state.completed;
-    this.props.onTodoUpdate({completed: completed});
+    this.props.onTodoUpdate({id: e.target.name});
   },
   render: function() {
     var todo = this.props.todo;
     var id = todo.id;
     return (
-      <form onSubmit={this.handleUpdate}>
         <input
           type="Submit"
           name={id}
           value="Complete Todo"
           id="completeButton"
           readOnly
+          onClick={this.handleUpdate}
         />
-      </form>
     );
   }
 });

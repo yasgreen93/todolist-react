@@ -54,6 +54,26 @@ app.post('/api/todos', function(req, res) {
   });
 });
 
+app.post('/api/todos/update', function(req, res) {
+  fs.readFile(TODOS_FILE, function(err, data) {
+    if(err) {
+      console.log(err);
+      process.exit(1);
+    }
+    var requestedTodoId = req.body.id;
+    var todos = JSON.parse(data);
+    todos[requestedTodoId -1].completed = true;
+    fs.writeFile(TODOS_FILE, JSON.stringify(todos, null, 4), function(err) {
+      if(err) {
+        console.error(err);
+        process.exit(1);
+      }
+      res.json(todos);
+    });
+  });
+});
+
+
 app.listen(app.get('port'), function() {
   console.log('SERVER STARTED AT http://localhost:' + app.get('port') + '/');
 });

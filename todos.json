@@ -9,7 +9,7 @@
         "id": 2,
         "text": "walk dog",
         "tag": "dog",
-        "completed": false
+        "completed": true
     },
     {
         "id": 3,
