@@ -11,6 +11,21 @@ form {
   margin: 10px 0px;
 }
 
+li {
+  list-style-type: none;
+  padding: 7px 0px;
+  background-color: #1eb3e9;
+  border-radius: 3px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 5px;
+  padding-left: 8px;
+  margin: 10px 0px;
+  color: #FFF;
+  max-width: 30%;
+}
+
 #addTodoText, #filterTodoText, #addTodoTag {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -55,9 +70,4 @@ form {
 ul {
   position: relative;
   padding-left: 0px;
-}
-
-li {
-  list-style-type: none;
-  padding: 7px 0px;
 }

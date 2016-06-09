@@ -73,12 +73,20 @@ var SingleTodo = React.createClass({
     var checkCompleted = function(todo) {
       return todo.completed ? "Completed!" : "Not completed...";
     };
-    var todoStyle = {
-      'textDecoration': todo.completed ? 'line-through' : ''
-    };
     return (
-        <li key={todo.id} style={todoStyle}>
-          {<CompleteTodoCheckbox todo={todo} />} <strong>Todo:</strong> {todo.text}, <strong>Tag:</strong> {todo.tag}, <strong>{checkCompleted(todo)}</strong>
+        <li key={todo.id}>
+          <div id="liCheckbox">
+            {<CompleteTodoCheckbox todo={todo} />}
+          </div>
+          <div id="liText">
+            <strong>Todo:</strong> {todo.text},
+          </div>
+          <div id="liTag">
+            <strong>Tag:</strong> {todo.tag},
+          </div>
+          <div id="liComplete">
+            <strong>{checkCompleted(todo)}</strong>
+          </div>
         </li>
     );
   }
@@ -108,7 +116,6 @@ var CompleteCheckbox = React.createClass({
     this.setState({complete: !this.state.complete})
   },
   render: function() {
-    var todoStyle={'text-decoration': this.state.complete ? 'line-through' : ''};
     var todo = this.props.todo;
     var id = todo.id;
     return <input
