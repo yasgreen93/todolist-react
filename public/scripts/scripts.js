@@ -30,6 +30,26 @@ var TodoListTable = React.createClass({
       }.bind(this)
     });
   },
+  handleTodoUpdate: function(todo) {
+    console.log("called...");
+    var todos = this.state.data;
+    // var newTodos = todos.concat([todo]);
+    // this.setState({data: newTodos});
+    $.ajax({
+      url: this.props.updateUrl,
+      dataType: 'json',
+      type: 'POST',
+      data: todo,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        this.setState({data: todos});
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+
   getInitialState: function() {
     return {data: []};
   },
@@ -41,8 +61,8 @@ var TodoListTable = React.createClass({
     return (
       <div className="TodoTable">
         <h2>Todo List!</h2>
-        <AddTodo onTodoSubmit={this.handleTodoSubmit}/>
-        <TodoList data={this.state.data}/>
+        <AddTodo onTodoSubmit={this.handleTodoSubmit} />
+        <TodoList data={this.state.data} onTodoUpdate={this.handleTodoUpdate}/>
       </div>
     );
   }
@@ -50,6 +70,7 @@ var TodoListTable = React.createClass({
 
 var TodoList = React.createClass({
   render: function() {
+    var update = this.props.onTodoUpdate;
     var list = [];
     this.props.data.forEach(function(todo) {
       list.push(todo);
@@ -58,7 +79,7 @@ var TodoList = React.createClass({
       <ul className="Todos">
         {list.map(function(todo) {
           return (
-            <SingleTodo todo={todo}/>
+            <SingleTodo todo={todo} onTodoUpdate={update}/>
           );
         })}
       </ul>
@@ -68,6 +89,7 @@ var TodoList = React.createClass({
 
 var SingleTodo = React.createClass({
   render: function() {
+    var update = this.props.onTodoUpdate;
     var todo = this.props.todo;
     var checkCompleted = function(todo) {
       return todo.completed ? "Completed!" : "Not completed...";
@@ -84,47 +106,10 @@ var SingleTodo = React.createClass({
             <strong>{checkCompleted(todo)}</strong>
           </div>
           <div id="liButton">
-            {<CompleteTodoButton todo={todo} />}
+            {<CompleteTodoButton todo={todo} onTodoUpdate={update}/>}
           </div>
         </li>
     );
-  }
-});
-
-var CompleteTodoButton = React.createClass({
-  render: function() {
-    var button;
-    var todo = this.props.todo;
-    var completed = todo.completed;
-    if(completed === false) {
-      button = <CompleteButton todo={todo}/>;
-    }
-    return (
-      <span>
-        {button}
-      </span>
-    );
-  }
-});
-
-var CompleteButton = React.createClass({
-  getInitialState: function() {
-    return { complete: false };
-  },
-  handleChange: function() {
-    this.setState({complete: !this.state.complete})
-  },
-  render: function() {
-    var todo = this.props.todo;
-    var id = todo.id;
-    return <input
-              type="Button"
-              name={id}
-              value="Complete Todo"
-              id="completeButton"
-              defaultChecked={this.props.complete}
-              onChange={this.handleChange}
-            />;
   }
 });
 
@@ -172,7 +157,51 @@ var AddTodo = React.createClass({
   }
 });
 
+var CompleteTodoButton = React.createClass({
+  render: function() {
+    var update = this.props.onTodoUpdate;
+    var button;
+    var todo = this.props.todo;
+    var completed = todo.completed;
+    if(completed === false) {
+      button = <CompleteButton todo={todo} onTodoUpdate={update}/>;
+    }
+    return (
+      <span>
+        {button}
+      </span>
+    );
+  }
+});
+
+var CompleteButton = React.createClass({
+  getInitialState: function() {
+    return {text: this.props.text, tag: this.props.tag, completed: this.props.completed};
+  },
+  handleUpdate: function(e) {
+    e.preventDefault();
+    var completed = this.state.completed;
+    this.props.onTodoUpdate({completed: completed});
+  },
+  render: function() {
+    var todo = this.props.todo;
+    var id = todo.id;
+    return (
+      <form onSubmit={this.handleUpdate}>
+        <input
+          type="Submit"
+          name={id}
+          value="Complete Todo"
+          id="completeButton"
+          readOnly
+        />
+      </form>
+    );
+  }
+});
+
+
 ReactDOM.render(
-  <TodoListTable url="/api/todos" pollInterval={2000}/>,
+  <TodoListTable url="/api/todos" updateUrl="/api/todos/update" pollInterval={2000}/>,
   document.getElementById('container')
 );
