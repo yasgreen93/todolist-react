@@ -59,22 +59,33 @@ var TodoList = React.createClass({
     this.props.todos.forEach(function(todo) {
       list.push(todo);
     });
-    var checkCompleted = function(todo){
-      return todo.completed === true ? "Completed!" : "Not completed...";
-    };
     return (
       <ul className="Todos">
         {list.map(function(todo, index) {
           return (
-            <div id={index}>
-              <li key={index}>
-                <strong>Todo:</strong> {todo.text}, <strong>Tag:</strong> {todo.tag}, <strong>{checkCompleted(todo)}</strong>
-                {<CompleteTodoButton completed={todo.completed} id={index} />}
-              </li>
-            </div>
+            <SingleTodo idNum={index} todo={todo}/>
           );
         })}
       </ul>
+    );
+  }
+});
+
+var SingleTodo = React.createClass({
+  render: function() {
+    var checkCompleted = function(todo) {
+      return todo.completed === true ? "Completed!" : "Not completed...";
+    };
+    var todo = this.props.todo;
+    var key = this.props.idNum;
+    return (
+      <div id={key}>
+        <li key={key}>
+          <strong>Todo:</strong> {todo.text}, <strong>Tag:</strong> {todo.tag}, <strong>{checkCompleted(todo)}</strong>
+          {<CompleteTodoButton completed={todo.completed} id={key} />}
+        </li>
+      </div>
+
     );
   }
 });
