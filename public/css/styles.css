@@ -1,3 +1,9 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 body {
   font-family: Helvetica, sans-serif;
   background-color: #c9e5ee;
@@ -16,20 +22,16 @@ li {
   padding: 7px 0px;
   background-color: #1eb3e9;
   border-radius: 3px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
   padding: 5px;
   padding-left: 8px;
   margin: 10px 0px;
   color: #FFF;
   max-width: 30%;
+  text-align: center;
 }
 
-#addTodoText, #filterTodoText, #addTodoTag {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+#addTodoText,
+#addTodoTag {
   height: 30px;
   width: 150px;
   font-size: 14px;
@@ -37,33 +39,42 @@ li {
   margin-right: 8px;
   border-radius: 3px;
   border-style: hidden;
-  color: #1eb3e9;
+  color: #FF8500;
 }
 
 #addTodoText:focus,
-#filterTodoText:focus,
 #addTodoTag:focus,
 #addTodoSubmit:focus,
-#filterTodoSubmit:focus,
-#completeCheckbox:focus {
+#completeButton:focus {
   outline: none;
 }
 
-#addTodoSubmit, #filterTodoSubmit {
+#addTodoSubmit,
+#completeButton {
   width: 70px;
   height: 30px;
   font-size: 16px;
   border-style: hidden;
   border-radius: 3px;
   background-color: #FFF;
+  color: #1eb3e9;
 }
 
-#addTodoSubmit:hover, #filterTodoSubmit:hover, #completeButton:hover {
-  background-color: #1eb3e9;
+#completeButton {
+  width: 160px;
+  height: 30px;
+  font-size: 16px;
+  padding: 6px;
+}
+
+#addTodoSubmit:hover,
+#completeButton:hover {
+  background-color: #FF8500;
   color: #FFF;
 }
 
-#addTodoSubmit:active, #filterTodoSubmit:active, #completeButton:active {
+#addTodoSubmit:active,
+#completeButton:active {
   color: #FFF;
 }
 

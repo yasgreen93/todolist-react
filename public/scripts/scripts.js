@@ -42,7 +42,6 @@ var TodoListTable = React.createClass({
       <div className="TodoTable">
         <h2>Todo List!</h2>
         <AddTodo onTodoSubmit={this.handleTodoSubmit}/>
-        <FilterTodo />
         <TodoList data={this.state.data}/>
       </div>
     );
@@ -75,30 +74,30 @@ var SingleTodo = React.createClass({
     };
     return (
         <li key={todo.id}>
-          <div id="liCheckbox">
-            {<CompleteTodoCheckbox todo={todo} />}
-          </div>
           <div id="liText">
-            <strong>Todo:</strong> {todo.text},
+            <strong>Todo:</strong> {todo.text}
           </div>
           <div id="liTag">
-            <strong>Tag:</strong> {todo.tag},
+            <strong>Tag:</strong> {todo.tag}
           </div>
           <div id="liComplete">
             <strong>{checkCompleted(todo)}</strong>
+          </div>
+          <div id="liButton">
+            {<CompleteTodoButton todo={todo} />}
           </div>
         </li>
     );
   }
 });
 
-var CompleteTodoCheckbox = React.createClass({
+var CompleteTodoButton = React.createClass({
   render: function() {
     var button;
     var todo = this.props.todo;
     var completed = todo.completed;
     if(completed === false) {
-      button = <CompleteCheckbox todo={todo}/>;
+      button = <CompleteButton todo={todo}/>;
     }
     return (
       <span>
@@ -108,7 +107,7 @@ var CompleteTodoCheckbox = React.createClass({
   }
 });
 
-var CompleteCheckbox = React.createClass({
+var CompleteButton = React.createClass({
   getInitialState: function() {
     return { complete: false };
   },
@@ -119,10 +118,10 @@ var CompleteCheckbox = React.createClass({
     var todo = this.props.todo;
     var id = todo.id;
     return <input
-              type="checkbox"
+              type="Button"
               name={id}
-              value={this.state.complete}
-              id="completeCheckbox"
+              value="Complete Todo"
+              id="completeButton"
               defaultChecked={this.props.complete}
               onChange={this.handleChange}
             />;
@@ -168,17 +167,6 @@ var AddTodo = React.createClass({
           onChange={this.handleTagChange}
         />
         <input id="addTodoSubmit" type="submit" value="Add" />
-      </form>
-    );
-  }
-});
-
-var FilterTodo = React.createClass({
-  render: function() {
-    return (
-      <form className="FilterTodoForm">
-        <input id="filterTodoText" type="text" placeholder="Filter by a tag" />
-        <input id="filterTodoSubmit" type="submit" value="Filter" />
       </form>
     );
   }
