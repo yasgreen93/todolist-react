@@ -64,5 +64,3 @@ var TodoListApp = React.createClass({
     );
   }
 });
-
-module.exports = TodoListApp;
