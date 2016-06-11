@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 var AddTodo = React.createClass({
   getInitialState: function() {
     return {text: '', tag: '', completed: false};

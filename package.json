@@ -4,7 +4,7 @@
   "description": "A todo list built with react and node",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "babel-node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Yasmin Green",
@@ -13,6 +13,16 @@
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "react": "^15.1.0",
+    "react-dom": "^15.1.0",
     "react-draggable": "^2.1.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "react-hot-loader": "^1.3.0"
   }
 }

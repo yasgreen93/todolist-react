@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 var CompleteTodoButton = React.createClass({
   render: function() {
     var update = this.props.onTodoUpdate;

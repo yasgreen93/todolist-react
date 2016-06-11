@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 var CompleteTodo = React.createClass({
   getInitialState: function() {
     return {id: this.props.id};
