@@ -1,3 +1,5 @@
+var TodoListApp = require('./TodoListApp.jsx');
+
 var AddTodo = React.createClass({
   getInitialState: function() {
     return {text: '', tag: '', completed: false};
@@ -41,3 +43,5 @@ var AddTodo = React.createClass({
     );
   }
 });
+
+module.exports = AddTodo;

@@ -1,3 +1,6 @@
+var CompleteTodoButton = require('./CompleteTodoButton.jsx');
+var TodoListApp = require('./TodoListApp.jsx');
+
 var SingleTodo = React.createClass({
   render: function() {
     var update = this.props.onTodoUpdate;
@@ -23,3 +26,5 @@ var SingleTodo = React.createClass({
     );
   }
 });
+
+module.exports = SingleTodo;

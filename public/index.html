@@ -6,24 +6,11 @@
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.16/browser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
   </head>
 
   <body>
     <div id="container"></div>
-    <script type="text/babel" src="scripts/components/TodoListApp.js"></script>
-    <script type="text/babel" src="scripts/components/CompleteTodo.js"></script>
-    <script type="text/babel" src="scripts/components/TodoList.js"></script>
-    <script type="text/babel" src="scripts/components/SingleTodo.js"></script>
-    <script type="text/babel" src="scripts/components/AddTodo.js"></script>
-    <script type="text/babel" src="scripts/components/CompleteTodoButton.js"></script>
-
-    <script type="text/babel">
-      ReactDOM.render(
-        <TodoListApp url="/api/todos" updateUrl="/api/todos/update" pollInterval={2000}/>,
-        document.getElementById('container')
-      );
-    </script>
+    <script src="./scripts/app.built.js"></script>
   </body>
 </html>

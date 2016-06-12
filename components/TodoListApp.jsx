@@ -1,3 +1,6 @@
+var AddTodo = require('./AddTodo.jsx');
+var TodoList = require('./TodoList.jsx');
+
 var TodoListApp = React.createClass({
   loadTodosFromServer: function() {
     $.ajax({
@@ -64,3 +67,5 @@ var TodoListApp = React.createClass({
     );
   }
 });
+
+module.exports = TodoListApp;
