@@ -2,7 +2,8 @@ var SingleTodo = require('./SingleTodo.jsx');
 
 module.exports = React.createClass({
   render: function() {
-    var update = this.props.onTodoUpdate;
+    var updateTodo = this.props.onTodoUpdate;
+    var deleteTodo = this.props.onTodoDelete;
     var list = [];
     this.props.data.forEach(function(todo) {
       list.push(todo);
@@ -12,7 +13,7 @@ module.exports = React.createClass({
       <ul className="Todos">
         {reversedList.map(function(todo) {
           return (
-            <SingleTodo todo={todo} onTodoUpdate={update}/>
+            <SingleTodo todo={todo} onTodoUpdate={updateTodo} onTodoDelete={deleteTodo}/>
           );
         })}
       </ul>

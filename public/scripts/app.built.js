@@ -89,11 +89,38 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 },{"./CompleteTodo.jsx":2}],4:[function(require,module,exports){
+module.exports = React.createClass({displayName: "exports",
+  getInitialState: function() {
+    return {id: this.props.id};
+  },
+  handleUpdate: function(e) {
+    e.preventDefault();
+    this.props.onTodoDelete({id: e.target.name});
+  },
+  render: function() {
+    var todo = this.props.todo;
+    var id = todo.id;
+    return (
+        React.createElement("input", {
+          type: "Submit", 
+          name: id, 
+          value: "Delete Todo", 
+          id: "DeleteButton", 
+          readOnly: true, 
+          onClick: this.handleUpdate}
+        )
+    );
+  }
+});
+
+},{}],5:[function(require,module,exports){
 var CompleteTodoButton = require('./CompleteTodoButton.jsx');
+var DeleteTodoButton = require('./DeleteTodoButton.jsx');
 
 module.exports = React.createClass({displayName: "exports",
   render: function() {
-    var update = this.props.onTodoUpdate;
+    var deleteTodo = this.props.onTodoDelete;
+    var updateTodo = this.props.onTodoUpdate;
     var todo = this.props.todo;
     var checkCompleted = function(todo) {
       return todo.completed ? "Completed!" : "Not completed...";
@@ -109,20 +136,24 @@ module.exports = React.createClass({displayName: "exports",
           React.createElement("div", {id: "liComplete"}, 
             React.createElement("strong", null, checkCompleted(todo))
           ), 
-          React.createElement("div", {id: "liButton"}, 
-            React.createElement(CompleteTodoButton, {todo: todo, onTodoUpdate: update})
+          React.createElement("div", {id: "liuUpdateButton"}, 
+            React.createElement(CompleteTodoButton, {todo: todo, onTodoUpdate: updateTodo})
+          ), 
+          React.createElement("div", {id: "liDeleteButton"}, 
+            React.createElement(DeleteTodoButton, {todo: todo, onTodoDelete: deleteTodo})
           )
         )
     );
   }
 });
 
-},{"./CompleteTodoButton.jsx":3}],5:[function(require,module,exports){
+},{"./CompleteTodoButton.jsx":3,"./DeleteTodoButton.jsx":4}],6:[function(require,module,exports){
 var SingleTodo = require('./SingleTodo.jsx');
 
 module.exports = React.createClass({displayName: "exports",
   render: function() {
-    var update = this.props.onTodoUpdate;
+    var updateTodo = this.props.onTodoUpdate;
+    var deleteTodo = this.props.onTodoDelete;
     var list = [];
     this.props.data.forEach(function(todo) {
       list.push(todo);
@@ -132,7 +163,7 @@ module.exports = React.createClass({displayName: "exports",
       React.createElement("ul", {className: "Todos"}, 
         reversedList.map(function(todo) {
           return (
-            React.createElement(SingleTodo, {todo: todo, onTodoUpdate: update})
+            React.createElement(SingleTodo, {todo: todo, onTodoUpdate: updateTodo, onTodoDelete: deleteTodo})
           );
         })
       )
@@ -140,16 +171,14 @@ module.exports = React.createClass({displayName: "exports",
   }
 });
 
-},{"./SingleTodo.jsx":4}],6:[function(require,module,exports){
+},{"./SingleTodo.jsx":5}],7:[function(require,module,exports){
 var AddTodo = require('./AddTodo.jsx');
 var TodoList = require('./TodoList.jsx');
 
 module.exports.default = TodoListApp = React.createClass({displayName: "TodoListApp",
   loadTodosFromServer: function() {
     $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      cache: false,
+      url: this.props.url, dataType: 'json', cache: false,
       success: function(data) {
         this.setState({data: data})
       }.bind(this),
@@ -163,10 +192,8 @@ module.exports.default = TodoListApp = React.createClass({displayName: "TodoList
     var newTodos = todos.concat([todo]);
     this.setState({data: newTodos});
     $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      type: 'POST',
-      data: todo,
+      url: this.props.url, dataType: 'json',
+      type: 'POST', data: todo,
       success: function(data) {
         this.setState({data: data});
       }.bind(this),
@@ -179,10 +206,8 @@ module.exports.default = TodoListApp = React.createClass({displayName: "TodoList
   handleTodoUpdate: function(id) {
     var todos = this.state.data;
      $.ajax({
-      url: this.props.updateUrl,
-      dataType: 'json',
-      type: 'POST',
-      data: id,
+      url: this.props.updateUrl, dataType: 'json',
+      type: 'POST', data: id,
       success: function(data) {
         this.setState({data: data});
       }.bind(this),
@@ -192,7 +217,20 @@ module.exports.default = TodoListApp = React.createClass({displayName: "TodoList
       }.bind(this)
     });
   },
-
+  handleTodoDelete: function(id) {
+    var todos = this.state.data;
+     $.ajax({
+      url: this.props.deleteUrl, dataType: 'json',
+      type: 'POST', data: id,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        this.setState({data: todos});
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
   getInitialState: function() {
     return {data: []};
   },
@@ -205,18 +243,18 @@ module.exports.default = TodoListApp = React.createClass({displayName: "TodoList
       React.createElement("div", {className: "TodoTable"}, 
         React.createElement("h2", {id: "pageHeader"}, "Todo List!"), 
         React.createElement(AddTodo, {onTodoSubmit: this.handleTodoSubmit}), 
-        React.createElement(TodoList, {data: this.state.data, onTodoUpdate: this.handleTodoUpdate})
+        React.createElement(TodoList, {data: this.state.data, onTodoUpdate: this.handleTodoUpdate, onTodoDelete: this.handleTodoDelete})
       )
     );
   }
 });
 
-},{"./AddTodo.jsx":1,"./TodoList.jsx":5}],7:[function(require,module,exports){
+},{"./AddTodo.jsx":1,"./TodoList.jsx":6}],8:[function(require,module,exports){
 var TodoListApp = require('./TodoListApp.jsx').default;
 
 ReactDOM.render(
-  React.createElement(TodoListApp, {url: "/api/todos", updateUrl: "/api/todos/update", pollInterval: 2000}),
+  React.createElement(TodoListApp, {url: "/api/todos", updateUrl: "/api/todos/update", deleteUrl: "/api/todos/delete", pollInterval: 2000}),
   document.getElementById('container')
 );
 
-},{"./TodoListApp.jsx":6}]},{},[1,2,3,7,4,5,6]);
+},{"./TodoListApp.jsx":7}]},{},[1,2,3,4,8,5,6,7]);

@@ -65,12 +65,14 @@ li {
 #addTodoText:focus,
 #addTodoTag:focus,
 #addTodoSubmit:focus,
-#CompleteTodo:focus {
+#CompleteTodo:focus,
+#DeleteButton:focus {
   outline: none;
 }
 
 #addTodoSubmit,
-#CompleteTodo {
+#CompleteTodo,
+#DeleteButton {
   width: 70px;
   height: 30px;
   font-size: 16px;
@@ -80,7 +82,8 @@ li {
   color: #1eb3e9;
 }
 
-#CompleteTodo {
+#CompleteTodo,
+#DeleteButton {
   width: 160px;
   height: 30px;
   font-size: 16px;
@@ -88,12 +91,14 @@ li {
 }
 
 #addTodoSubmit:hover,
-#CompleteTodo:hover {
+#CompleteTodo:hover,
+#DeleteButton:hover {
   background-color: #FF8500;
   color: #FFF;
 }
 
 #addTodoSubmit:active,
-#CompleteTodo:active {
+#CompleteTodo:active,
+#DeleteButton:active {
   color: #FFF;
 }

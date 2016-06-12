@@ -1,8 +1,10 @@
 var CompleteTodoButton = require('./CompleteTodoButton.jsx');
+var DeleteTodoButton = require('./DeleteTodoButton.jsx');
 
 module.exports = React.createClass({
   render: function() {
-    var update = this.props.onTodoUpdate;
+    var deleteTodo = this.props.onTodoDelete;
+    var updateTodo = this.props.onTodoUpdate;
     var todo = this.props.todo;
     var checkCompleted = function(todo) {
       return todo.completed ? "Completed!" : "Not completed...";
@@ -18,8 +20,11 @@ module.exports = React.createClass({
           <div id="liComplete">
             <strong>{checkCompleted(todo)}</strong>
           </div>
-          <div id="liButton">
-            {<CompleteTodoButton todo={todo} onTodoUpdate={update}/>}
+          <div id="liuUpdateButton">
+            {<CompleteTodoButton todo={todo} onTodoUpdate={updateTodo}/>}
+          </div>
+          <div id="liDeleteButton">
+            {<DeleteTodoButton todo={todo} onTodoDelete={deleteTodo}/>}
           </div>
         </li>
     );

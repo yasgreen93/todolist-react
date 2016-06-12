@@ -4,9 +4,7 @@ var TodoList = require('./TodoList.jsx');
 module.exports.default = TodoListApp = React.createClass({
   loadTodosFromServer: function() {
     $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      cache: false,
+      url: this.props.url, dataType: 'json', cache: false,
       success: function(data) {
         this.setState({data: data})
       }.bind(this),
@@ -20,10 +18,8 @@ module.exports.default = TodoListApp = React.createClass({
     var newTodos = todos.concat([todo]);
     this.setState({data: newTodos});
     $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      type: 'POST',
-      data: todo,
+      url: this.props.url, dataType: 'json',
+      type: 'POST', data: todo,
       success: function(data) {
         this.setState({data: data});
       }.bind(this),
@@ -36,10 +32,8 @@ module.exports.default = TodoListApp = React.createClass({
   handleTodoUpdate: function(id) {
     var todos = this.state.data;
      $.ajax({
-      url: this.props.updateUrl,
-      dataType: 'json',
-      type: 'POST',
-      data: id,
+      url: this.props.updateUrl, dataType: 'json',
+      type: 'POST', data: id,
       success: function(data) {
         this.setState({data: data});
       }.bind(this),
@@ -49,7 +43,20 @@ module.exports.default = TodoListApp = React.createClass({
       }.bind(this)
     });
   },
-
+  handleTodoDelete: function(id) {
+    var todos = this.state.data;
+     $.ajax({
+      url: this.props.deleteUrl, dataType: 'json',
+      type: 'POST', data: id,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        this.setState({data: todos});
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
   getInitialState: function() {
     return {data: []};
   },
@@ -62,7 +69,7 @@ module.exports.default = TodoListApp = React.createClass({
       <div className="TodoTable">
         <h2 id="pageHeader">Todo List!</h2>
         <AddTodo onTodoSubmit={this.handleTodoSubmit} />
-        <TodoList data={this.state.data} onTodoUpdate={this.handleTodoUpdate}/>
+        <TodoList data={this.state.data} onTodoUpdate={this.handleTodoUpdate} onTodoDelete={this.handleTodoDelete}/>
       </div>
     );
   }
