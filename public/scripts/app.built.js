@@ -120,16 +120,48 @@ module.exports = React.createClass({displayName: "exports",
 },{}],5:[function(require,module,exports){
 var CompleteTodoButton = require('./CompleteTodoButton.jsx');
 var DeleteTodoButton = require('./DeleteTodoButton.jsx');
+var Draggable = ReactDraggable;
 
 module.exports = React.createClass({displayName: "exports",
+  getInitialState: function () {
+    return {
+      activeDrags: 0,
+      deltaPosition: {
+        x: 0, y: 0
+      },
+      controlledPosition: {
+        x: -400, y: 200
+      }
+    };
+  },
+
+  handleDrag: function (e, ui) {
+    const {x, y} = this.state.deltaPosition;
+    this.setState({
+      deltaPosition: {
+        x: x + ui.deltaX,
+        y: y + ui.deltaY,
+      }
+    });
+  },
+
+  onStart: function() {
+    this.setState({activeDrags: ++this.state.activeDrags});
+  },
+
+  onStop: function() {
+    this.setState({activeDrags: --this.state.activeDrags});
+  },
   render: function() {
-    var deleteTodo = this.props.onTodoDelete;
-    var updateTodo = this.props.onTodoUpdate;
+    var dragHandlers = {onStart: this.onStart, onStop: this.onStop};
+    var deltaPosition = this.state;
+    var controlledPosition = this.state;
     var todo = this.props.todo;
     var checkCompleted = function(todo) {
       return todo.completed ? "Completed!" : "Not completed...";
     };
     return (
+      React.createElement(Draggable, React.__spread({zIndex: 100},  dragHandlers), 
         React.createElement("li", {key: todo.id}, 
           React.createElement("div", {id: "liText"}, 
             React.createElement("strong", null, "Todo:"), " ", todo.text
@@ -141,12 +173,13 @@ module.exports = React.createClass({displayName: "exports",
             React.createElement("strong", null, checkCompleted(todo))
           ), 
           React.createElement("div", {id: "liuUpdateButton"}, 
-            React.createElement(CompleteTodoButton, {todo: todo, onTodoUpdate: updateTodo})
+            React.createElement(CompleteTodoButton, {todo: todo, onTodoUpdate: this.props.onTodoUpdate})
           ), 
           React.createElement("div", {id: "liDeleteButton"}, 
-            React.createElement(DeleteTodoButton, {todo: todo, onTodoDelete: deleteTodo})
+            React.createElement(DeleteTodoButton, {todo: todo, onTodoDelete: this.props.onTodoDelete})
           )
         )
+      )
     );
   }
 });
