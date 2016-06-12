@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 var TodoListApp = require('./TodoListApp.jsx').default;
 
 ReactDOM.render(

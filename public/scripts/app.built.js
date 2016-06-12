@@ -1,7 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var TodoListApp = require('./TodoListApp.jsx');
-
-var AddTodo = React.createClass({displayName: "AddTodo",
+module.exports = React.createClass({displayName: "exports",
   getInitialState: function() {
     return {text: '', tag: '', completed: false};
   },
@@ -45,12 +43,8 @@ var AddTodo = React.createClass({displayName: "AddTodo",
   }
 });
 
-module.exports = AddTodo;
-
-},{"./TodoListApp.jsx":6}],2:[function(require,module,exports){
-var TodoListApp = require('./TodoListApp.jsx');
-
-var CompleteTodo = React.createClass({displayName: "CompleteTodo",
+},{}],2:[function(require,module,exports){
+module.exports = React.createClass({displayName: "exports",
   getInitialState: function() {
     return {id: this.props.id};
   },
@@ -74,13 +68,10 @@ var CompleteTodo = React.createClass({displayName: "CompleteTodo",
   }
 });
 
-module.exports = CompleteTodo;
-
-},{"./TodoListApp.jsx":6}],3:[function(require,module,exports){
-var TodoListApp = require('./TodoListApp.jsx');
+},{}],3:[function(require,module,exports){
 var CompleteTodo = require('./CompleteTodo.jsx');
 
-var CompleteTodoButton = React.createClass({displayName: "CompleteTodoButton",
+module.exports = React.createClass({displayName: "exports",
   render: function() {
     var update = this.props.onTodoUpdate;
     var button;
@@ -97,13 +88,10 @@ var CompleteTodoButton = React.createClass({displayName: "CompleteTodoButton",
   }
 });
 
-module.exports = CompleteTodoButton;
-
-},{"./CompleteTodo.jsx":2,"./TodoListApp.jsx":6}],4:[function(require,module,exports){
+},{"./CompleteTodo.jsx":2}],4:[function(require,module,exports){
 var CompleteTodoButton = require('./CompleteTodoButton.jsx');
-var TodoListApp = require('./TodoListApp.jsx');
 
-var SingleTodo = React.createClass({displayName: "SingleTodo",
+module.exports = React.createClass({displayName: "exports",
   render: function() {
     var update = this.props.onTodoUpdate;
     var todo = this.props.todo;
@@ -129,12 +117,10 @@ var SingleTodo = React.createClass({displayName: "SingleTodo",
   }
 });
 
-module.exports = SingleTodo;
-
-},{"./CompleteTodoButton.jsx":3,"./TodoListApp.jsx":6}],5:[function(require,module,exports){
+},{"./CompleteTodoButton.jsx":3}],5:[function(require,module,exports){
 var SingleTodo = require('./SingleTodo.jsx');
 
-var TodoList = React.createClass({displayName: "TodoList",
+module.exports = React.createClass({displayName: "exports",
   render: function() {
     var update = this.props.onTodoUpdate;
     var list = [];
@@ -154,13 +140,11 @@ var TodoList = React.createClass({displayName: "TodoList",
   }
 });
 
-module.exports = TodoList;
-
 },{"./SingleTodo.jsx":4}],6:[function(require,module,exports){
 var AddTodo = require('./AddTodo.jsx');
 var TodoList = require('./TodoList.jsx');
 
-var TodoListApp = React.createClass({displayName: "TodoListApp",
+module.exports.default = TodoListApp = React.createClass({displayName: "TodoListApp",
   loadTodosFromServer: function() {
     $.ajax({
       url: this.props.url,
@@ -227,10 +211,7 @@ var TodoListApp = React.createClass({displayName: "TodoListApp",
   }
 });
 
-module.exports = TodoListApp;
-
 },{"./AddTodo.jsx":1,"./TodoList.jsx":5}],7:[function(require,module,exports){
-/** @jsx React.DOM */
 var TodoListApp = require('./TodoListApp.jsx').default;
 
 ReactDOM.render(

@@ -65,12 +65,12 @@ li {
 #addTodoText:focus,
 #addTodoTag:focus,
 #addTodoSubmit:focus,
-#completeTodo:focus {
+#CompleteTodo:focus {
   outline: none;
 }
 
 #addTodoSubmit,
-#completeTodo {
+#CompleteTodo {
   width: 70px;
   height: 30px;
   font-size: 16px;
@@ -80,7 +80,7 @@ li {
   color: #1eb3e9;
 }
 
-#completeTodo {
+#CompleteTodo {
   width: 160px;
   height: 30px;
   font-size: 16px;
@@ -88,12 +88,12 @@ li {
 }
 
 #addTodoSubmit:hover,
-#completeTodo:hover {
+#CompleteTodo:hover {
   background-color: #FF8500;
   color: #FFF;
 }
 
 #addTodoSubmit:active,
-#completeTodo:active {
+#CompleteTodo:active {
   color: #FFF;
 }

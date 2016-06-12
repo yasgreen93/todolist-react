@@ -1,6 +1,4 @@
-var TodoListApp = require('./TodoListApp.jsx');
-
-var CompleteTodo = React.createClass({
+module.exports = React.createClass({
   getInitialState: function() {
     return {id: this.props.id};
   },
@@ -23,5 +21,3 @@ var CompleteTodo = React.createClass({
     );
   }
 });
-
-module.exports = CompleteTodo;

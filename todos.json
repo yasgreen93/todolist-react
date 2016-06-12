@@ -33,7 +33,7 @@
         "id": 6,
         "text": "feed dog",
         "tag": "dog",
-        "completed": false
+        "completed": true
     },
     {
         "id": 7,

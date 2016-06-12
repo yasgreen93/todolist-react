@@ -1,6 +1,6 @@
 var SingleTodo = require('./SingleTodo.jsx');
 
-var TodoList = React.createClass({
+module.exports = React.createClass({
   render: function() {
     var update = this.props.onTodoUpdate;
     var list = [];
@@ -19,5 +19,3 @@ var TodoList = React.createClass({
     );
   }
 });
-
-module.exports = TodoList;

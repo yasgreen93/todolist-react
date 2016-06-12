@@ -1,7 +1,6 @@
-var TodoListApp = require('./TodoListApp.jsx');
 var CompleteTodo = require('./CompleteTodo.jsx');
 
-var CompleteTodoButton = React.createClass({
+module.exports = React.createClass({
   render: function() {
     var update = this.props.onTodoUpdate;
     var button;
@@ -17,5 +16,3 @@ var CompleteTodoButton = React.createClass({
     );
   }
 });
-
-module.exports = CompleteTodoButton;
