@@ -25,6 +25,7 @@ module.exports = React.createClass({displayName: "exports",
       React.createElement("form", {className: "AddTodoForm", onSubmit: this.handleSubmit, id: "addTodoForm"}, 
         React.createElement("input", {
           id: "addTodoText", 
+          className: "todoForm", 
           type: "text", 
           placeholder: "Add a Todo", 
           value: this.state.text, 
@@ -32,12 +33,13 @@ module.exports = React.createClass({displayName: "exports",
         ), 
         React.createElement("input", {
           id: "addTodoTag", 
+          className: "todoForm", 
           type: "text", 
           placeholder: "Tag your Todo", 
           value: this.state.tag, 
           onChange: this.handleTagChange}
         ), 
-        React.createElement("input", {id: "addTodoSubmit", type: "submit", value: "Add"})
+        React.createElement("input", {id: "addTodoSubmit", className: "buttons", type: "submit", value: "Add"})
       )
     );
   }
@@ -59,6 +61,7 @@ module.exports = React.createClass({displayName: "exports",
         React.createElement("input", {
           type: "Submit", 
           name: id, 
+          className: "buttons", 
           value: "Complete Todo", 
           id: "CompleteTodo", 
           readOnly: true, 
@@ -104,6 +107,7 @@ module.exports = React.createClass({displayName: "exports",
         React.createElement("input", {
           type: "Submit", 
           name: id, 
+          className: "buttons", 
           value: "Delete Todo", 
           id: "DeleteButton", 
           readOnly: true, 
@@ -241,8 +245,10 @@ module.exports.default = TodoListApp = React.createClass({displayName: "TodoList
   render: function() {
     return (
       React.createElement("div", {className: "TodoTable"}, 
-        React.createElement("h2", {id: "pageHeader"}, "Todo List!"), 
-        React.createElement(AddTodo, {onTodoSubmit: this.handleTodoSubmit}), 
+        React.createElement("div", {className: "fixedHeader"}, 
+          React.createElement("h2", {id: "pageHeader"}, "Todo List!"), 
+          React.createElement(AddTodo, {onTodoSubmit: this.handleTodoSubmit})
+        ), 
         React.createElement(TodoList, {data: this.state.data, onTodoUpdate: this.handleTodoUpdate, onTodoDelete: this.handleTodoDelete})
       )
     );

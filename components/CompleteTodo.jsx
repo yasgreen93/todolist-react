@@ -13,6 +13,7 @@ module.exports = React.createClass({
         <input
           type="Submit"
           name={id}
+          className="buttons"
           value="Complete Todo"
           id="CompleteTodo"
           readOnly

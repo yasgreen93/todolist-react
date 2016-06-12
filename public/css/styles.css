@@ -26,13 +26,25 @@ div {
   z-index: 1;
 }
 
+.fixedHeader {
+  position: fixed;
+  left: -2px;
+  top: -10px;
+  border-radius: 3px;
+  width: 430px;
+  height: 110px;
+  padding: 20px;
+  background-color: #c9e5ee;
+  z-index: 1;
+}
+
 form {
   margin: 10px 0px;
 }
 
 ul {
   position: relative;
-  top: 95px;
+  top: 98px;
   padding-left: 0px;
   z-index: 0;
 }
@@ -50,8 +62,7 @@ li {
   text-align: center;
 }
 
-#addTodoText,
-#addTodoTag {
+.todoForm {
   height: 30px;
   width: 150px;
   font-size: 14px;
@@ -62,17 +73,12 @@ li {
   color: #FF8500;
 }
 
-#addTodoText:focus,
-#addTodoTag:focus,
-#addTodoSubmit:focus,
-#CompleteTodo:focus,
-#DeleteButton:focus {
+.todoForm:focus,
+.buttons:focus {
   outline: none;
 }
 
-#addTodoSubmit,
-#CompleteTodo,
-#DeleteButton {
+.buttons {
   width: 70px;
   height: 30px;
   font-size: 16px;
@@ -90,15 +96,11 @@ li {
   padding: 6px;
 }
 
-#addTodoSubmit:hover,
-#CompleteTodo:hover,
-#DeleteButton:hover {
+.buttons:hover {
   background-color: #FF8500;
   color: #FFF;
 }
 
-#addTodoSubmit:active,
-#CompleteTodo:active,
-#DeleteButton:active {
+.buttons:active {
   color: #FFF;
 }

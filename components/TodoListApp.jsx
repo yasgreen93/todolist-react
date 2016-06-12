@@ -67,8 +67,10 @@ module.exports.default = TodoListApp = React.createClass({
   render: function() {
     return (
       <div className="TodoTable">
-        <h2 id="pageHeader">Todo List!</h2>
-        <AddTodo onTodoSubmit={this.handleTodoSubmit} />
+        <div className="fixedHeader">
+          <h2 id="pageHeader">Todo List!</h2>
+          <AddTodo onTodoSubmit={this.handleTodoSubmit} />
+        </div>
         <TodoList data={this.state.data} onTodoUpdate={this.handleTodoUpdate} onTodoDelete={this.handleTodoDelete}/>
       </div>
     );

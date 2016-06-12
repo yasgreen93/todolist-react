@@ -24,6 +24,7 @@ module.exports = React.createClass({
       <form className="AddTodoForm" onSubmit={this.handleSubmit} id="addTodoForm">
         <input
           id="addTodoText"
+          className="todoForm"
           type="text"
           placeholder="Add a Todo"
           value={this.state.text}
@@ -31,12 +32,13 @@ module.exports = React.createClass({
         />
         <input
           id="addTodoTag"
+          className="todoForm"
           type="text"
           placeholder="Tag your Todo"
           value={this.state.tag}
           onChange={this.handleTagChange}
         />
-        <input id="addTodoSubmit" type="submit" value="Add" />
+        <input id="addTodoSubmit" className="buttons" type="submit" value="Add" />
       </form>
     );
   }
