@@ -1266,7 +1266,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	function makeEmptyFunction(arg) {
@@ -11823,7 +11823,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 * @typechecks static-only
 	 */
 
@@ -15987,7 +15987,7 @@
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
 	 * @typechecks
-	 *
+	 * 
 	 */
 
 	/*eslint-disable no-self-compare */
@@ -17815,7 +17815,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	var isTextNode = __webpack_require__(145);
@@ -20438,11 +20438,21 @@
 
 /***/ },
 /* 169 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var AddTodo = React.createClass({
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(39);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var AddTodo = _react2.default.createClass({
 	  displayName: 'AddTodo',
 
 	  getInitialState: function getInitialState() {
@@ -20466,36 +20476,46 @@
 	    this.setState({ text: '', tag: '' });
 	  },
 	  render: function render() {
-	    return React.createElement(
+	    return _react2.default.createElement(
 	      'form',
 	      { className: 'AddTodoForm', onSubmit: this.handleSubmit, id: 'addTodoForm' },
-	      React.createElement('input', {
+	      _react2.default.createElement('input', {
 	        id: 'addTodoText',
 	        type: 'text',
 	        placeholder: 'Add a Todo',
 	        value: this.state.text,
 	        onChange: this.handleTextChange
 	      }),
-	      React.createElement('input', {
+	      _react2.default.createElement('input', {
 	        id: 'addTodoTag',
 	        type: 'text',
 	        placeholder: 'Tag your Todo',
 	        value: this.state.tag,
 	        onChange: this.handleTagChange
 	      }),
-	      React.createElement('input', { id: 'addTodoSubmit', type: 'submit', value: 'Add' })
+	      _react2.default.createElement('input', { id: 'addTodoSubmit', type: 'submit', value: 'Add' })
 	    );
 	  }
 	});
 
 /***/ },
 /* 170 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
-	var TodoList = React.createClass({
-	  displayName: "TodoList",
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(39);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TodoList = _react2.default.createClass({
+	  displayName: 'TodoList',
 
 	  render: function render() {
 	    var update = this.props.onTodoUpdate;
@@ -20504,11 +20524,11 @@
 	      list.push(todo);
 	    });
 	    var reversedList = list.reverse();
-	    return React.createElement(
-	      "ul",
-	      { className: "Todos" },
+	    return _react2.default.createElement(
+	      'ul',
+	      { className: 'Todos' },
 	      reversedList.map(function (todo) {
-	        return React.createElement(SingleTodo, { todo: todo, onTodoUpdate: update });
+	        return _react2.default.createElement(SingleTodo, { todo: todo, onTodoUpdate: update });
 	      })
 	    );
 	  }
