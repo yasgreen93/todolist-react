@@ -15,7 +15,6 @@ app.use(bodyParser.urlencoded({extented: true}));
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
 
-  // Disable caching so we'll always get the latest comments.
   res.setHeader('Cache-Control', 'no-cache');
   next();
 });
@@ -54,6 +53,7 @@ app.post('/api/todos', function(req, res) {
     });
   });
 });
+
 app.post('/api/todos/update', function(req, res) {
   fs.readFile(TODOS_FILE, function(err, data) {
     if(err) {
@@ -62,11 +62,7 @@ app.post('/api/todos/update', function(req, res) {
     }
     var requestedTodoId = req.body.id;
     var todos = JSON.parse(data);
-    todos.map(function(todo) {
-      if(todo.id == requestedTodoId) {
-        todo.completed = true;
-      }
-    });
+    changeToCompleted(todos, requestedTodoId);
     fs.writeFile(TODOS_FILE, JSON.stringify(todos, null, 4), function(err) {
       if(err) {
         console.error(err);
@@ -76,6 +72,7 @@ app.post('/api/todos/update', function(req, res) {
     });
   });
 });
+
 app.post('/api/todos/delete', function(req, res) {
   fs.readFile(TODOS_FILE, function(err, data) {
     if(err) {
@@ -84,12 +81,7 @@ app.post('/api/todos/delete', function(req, res) {
     }
     var requestedTodoId = req.body.id;
     var todos = JSON.parse(data);
-    todos.map(function(todo) {
-      index = todos.indexOf(todo);
-      if(todo.id == requestedTodoId) {
-        todos.splice(index, 1);
-      }
-    });
+    deleteTodoFromList(todos, requestedTodoId);
     fs.writeFile(TODOS_FILE, JSON.stringify(todos, null, 4), function(err) {
       if(err) {
         console.error(err);
@@ -100,15 +92,32 @@ app.post('/api/todos/delete', function(req, res) {
   });
 });
 
+var deleteTodoFromList = function(todos, requestedTodoId) {
+  return todos.map(function(todo) {
+    index = todos.indexOf(todo);
+    if(todo.id == requestedTodoId) {
+      todos.splice(index, 1);
+    }
+  });
+};
+
+var changeToCompleted = function(todos, requestedTodoId) {
+  return todos.map(function(todo) {
+    if(todo.id == requestedTodoId) {
+      todo.completed = true;
+    }
+  });
+};
+
 var sumOfIdNums = function(todos) {
   var todoIds = [];
   todos.map(function(todo) {
     todoIds.push(todo.id);
   });
-  return todoIds.reduce(add, 0);
+  return todoIds.reduce(addIds, 0);
 };
 
-var add = function(a ,b) {
+var addIds = function(a ,b) {
   return a + b;
 };
 

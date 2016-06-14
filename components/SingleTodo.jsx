@@ -14,7 +14,6 @@ module.exports = React.createClass({
       }
     };
   },
-
   handleDrag: function (e, ui) {
     const {x, y} = this.state.deltaPosition;
     this.setState({
@@ -24,11 +23,9 @@ module.exports = React.createClass({
       }
     });
   },
-
   onStart: function() {
     this.setState({activeDrags: ++this.state.activeDrags});
   },
-
   onStop: function() {
     this.setState({activeDrags: --this.state.activeDrags});
   },

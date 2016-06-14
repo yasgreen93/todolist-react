@@ -2,6 +2,12 @@ var AddTodo = require('./AddTodo.jsx');
 var TodoList = require('./TodoList.jsx');
 
 module.exports.default = TodoListApp = React.createClass({
+  getInitialState: function() {
+    return {data: []};
+  },
+  componentDidMount: function() {
+    this.loadTodosFromServer();
+  },
   loadTodosFromServer: function() {
     this.callAjax("getTodos", this.props.url, "GET")
   },
@@ -28,12 +34,6 @@ module.exports.default = TodoListApp = React.createClass({
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
-  },
-  getInitialState: function() {
-    return {data: []};
-  },
-  componentDidMount: function() {
-    this.loadTodosFromServer();
   },
   render: function() {
     return (

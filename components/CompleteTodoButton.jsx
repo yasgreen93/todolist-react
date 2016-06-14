@@ -5,8 +5,7 @@ module.exports = React.createClass({
     var update = this.props.onTodoUpdate;
     var button;
     var todo = this.props.todo;
-    var completed = todo.completed;
-    if(completed === false) {
+    if(todo.completed === false) {
       button = <CompleteTodo todo={todo} onTodoUpdate={update}/>;
     }
     return (

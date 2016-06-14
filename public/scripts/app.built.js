@@ -79,8 +79,7 @@ module.exports = React.createClass({displayName: "exports",
     var update = this.props.onTodoUpdate;
     var button;
     var todo = this.props.todo;
-    var completed = todo.completed;
-    if(completed === false) {
+    if(todo.completed === false) {
       button = React.createElement(CompleteTodo, {todo: todo, onTodoUpdate: update});
     }
     return (
@@ -134,7 +133,6 @@ module.exports = React.createClass({displayName: "exports",
       }
     };
   },
-
   handleDrag: function (e, ui) {
     const {x, y} = this.state.deltaPosition;
     this.setState({
@@ -144,11 +142,9 @@ module.exports = React.createClass({displayName: "exports",
       }
     });
   },
-
   onStart: function() {
     this.setState({activeDrags: ++this.state.activeDrags});
   },
-
   onStop: function() {
     this.setState({activeDrags: --this.state.activeDrags});
   },
@@ -213,6 +209,12 @@ var AddTodo = require('./AddTodo.jsx');
 var TodoList = require('./TodoList.jsx');
 
 module.exports.default = TodoListApp = React.createClass({displayName: "TodoListApp",
+  getInitialState: function() {
+    return {data: []};
+  },
+  componentDidMount: function() {
+    this.loadTodosFromServer();
+  },
   loadTodosFromServer: function() {
     this.callAjax("getTodos", this.props.url, "GET")
   },
@@ -239,13 +241,6 @@ module.exports.default = TodoListApp = React.createClass({displayName: "TodoList
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
-  },
-  getInitialState: function() {
-    return {data: []};
-  },
-  componentDidMount: function() {
-    this.loadTodosFromServer();
-    // setInterval(this.loadTodosFromServer, this.props.pollInterval);
   },
   render: function() {
     return (
