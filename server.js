@@ -1,7 +1,7 @@
 var fs = require('fs');
 var path = require('path');
-var express = require('express');
 var bodyParser = require('body-parser');
+var express = require('express');
 var app = express();
 
 var TODOS_FILE = path.join(__dirname, 'todos.json');
@@ -10,14 +10,7 @@ app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extented: true}));
-
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-
-  res.setHeader('Cache-Control', 'no-cache');
-  next();
-});
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/api/todos', function(req, res) {
   fs.readFile(TODOS_FILE, function(err, data) {
