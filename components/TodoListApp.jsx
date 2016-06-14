@@ -34,7 +34,6 @@ module.exports.default = TodoListApp = React.createClass({
   },
   componentDidMount: function() {
     this.loadTodosFromServer();
-    setInterval(this.loadTodosFromServer, this.props.pollInterval);
   },
   render: function() {
     return (

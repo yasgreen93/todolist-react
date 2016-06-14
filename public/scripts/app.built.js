@@ -215,15 +215,6 @@ var TodoList = require('./TodoList.jsx');
 module.exports.default = TodoListApp = React.createClass({displayName: "TodoListApp",
   loadTodosFromServer: function() {
     this.callAjax("getTodos", this.props.url, "GET")
-    // $.ajax({
-    //   url: this.props.url, dataType: 'json', cache: false,
-    //   success: function(data) {
-    //     this.setState({data: data})
-    //   }.bind(this),
-    //   error: function(xhr, status, err) {
-    //     console.error(this.props.url, status, err.toString());
-    //   }.bind(this)
-    // });
   },
   handleTodoSubmit: function(todo) {
     var todos = this.state.data;
@@ -254,7 +245,7 @@ module.exports.default = TodoListApp = React.createClass({displayName: "TodoList
   },
   componentDidMount: function() {
     this.loadTodosFromServer();
-    setInterval(this.loadTodosFromServer, this.props.pollInterval);
+    // setInterval(this.loadTodosFromServer, this.props.pollInterval);
   },
   render: function() {
     return (
@@ -276,7 +267,7 @@ module.exports.default = TodoListApp = React.createClass({displayName: "TodoList
 var TodoListApp = require('./TodoListApp.jsx').default;
 
 ReactDOM.render(
-  React.createElement(TodoListApp, {url: "/api/todos", updateUrl: "/api/todos/update", deleteUrl: "/api/todos/delete", pollInterval: 2000}),
+  React.createElement(TodoListApp, {url: "/api/todos", updateUrl: "/api/todos/update", deleteUrl: "/api/todos/delete"}),
   document.getElementById('container')
 );
 
