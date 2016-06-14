@@ -15,7 +15,6 @@ body {
   top: 5px;
   z-index: 1;
 }
-
 .completedColumn {
   position: relative;
   display: inline-block;
@@ -75,6 +74,10 @@ li {
   color: #FFF;
   width: 250px;
   text-align: center;
+}
+
+.liText {
+  margin: 8px;
 }
 
 .todoForm {

@@ -55,8 +55,7 @@ module.exports = React.createClass({displayName: "exports",
     this.props.onTodoUpdate({id: e.target.name});
   },
   render: function() {
-    var todo = this.props.todo;
-    var id = todo.id;
+    var id = this.props.todo.id;
     return (
         React.createElement("input", {
           type: "Submit", 
@@ -76,11 +75,10 @@ var CompleteTodo = require('./CompleteTodo.jsx');
 
 module.exports = React.createClass({displayName: "exports",
   render: function() {
-    var update = this.props.onTodoUpdate;
     var button;
     var todo = this.props.todo;
     if(todo.completed === false) {
-      button = React.createElement(CompleteTodo, {todo: todo, onTodoUpdate: update});
+      button = React.createElement(CompleteTodo, {todo: todo, onTodoUpdate: this.props.onTodoUpdate});
     }
     return (
       React.createElement("span", null, 
@@ -100,8 +98,7 @@ module.exports = React.createClass({displayName: "exports",
     this.props.onTodoDelete({id: e.target.name});
   },
   render: function() {
-    var todo = this.props.todo;
-    var id = todo.id;
+    var id = this.props.todo.id;
     return (
         React.createElement("input", {
           type: "Submit", 
@@ -124,17 +121,14 @@ var Draggable = ReactDraggable;
 module.exports = React.createClass({displayName: "exports",
   getInitialState: function () {
     return {
-      activeDrags: 0,
       deltaPosition: {
         x: 0, y: 0
-      },
-      controlledPosition: {
-        x: -400, y: 200
       }
     };
   },
   handleDrag: function (e, ui) {
-    const {x, y} = this.state.deltaPosition;
+    var x = this.state.deltaPosition;
+    var y = this.state.deltaPosition;
     this.setState({
       deltaPosition: {
         x: x + ui.deltaX,
@@ -142,38 +136,19 @@ module.exports = React.createClass({displayName: "exports",
       }
     });
   },
-  onStart: function() {
-    this.setState({activeDrags: ++this.state.activeDrags});
-  },
-  onStop: function() {
-    this.setState({activeDrags: --this.state.activeDrags});
-  },
   render: function() {
-    var dragHandlers = {onStart: this.onStart, onStop: this.onStop};
-    var deltaPosition = this.state;
-    var controlledPosition = this.state;
     var todo = this.props.todo;
     var checkCompleted = function(todo) {
       return todo.completed ? "Completed!" : "Not completed...";
     };
     return (
-      React.createElement(Draggable, React.__spread({zIndex: 100},  dragHandlers), 
+      React.createElement(Draggable, {zIndex: 100}, 
         React.createElement("li", {key: todo.id}, 
-          React.createElement("div", {id: "liText"}, 
-            React.createElement("strong", null, "Todo:"), " ", todo.text
-          ), 
-          React.createElement("div", {id: "liTag"}, 
-            React.createElement("strong", null, "Tag:"), " ", todo.tag
-          ), 
-          React.createElement("div", {id: "liComplete"}, 
-            React.createElement("strong", null, checkCompleted(todo))
-          ), 
-          React.createElement("div", {id: "liuUpdateButton"}, 
-            React.createElement(CompleteTodoButton, {todo: todo, onTodoUpdate: this.props.onTodoUpdate})
-          ), 
-          React.createElement("div", {id: "liDeleteButton"}, 
-            React.createElement(DeleteTodoButton, {todo: todo, onTodoDelete: this.props.onTodoDelete})
-          )
+          React.createElement("p", {className: "liText"}, React.createElement("strong", null, "Todo:"), " ", todo.text), 
+          React.createElement("p", {className: "liText"}, React.createElement("strong", null, "Tag:"), " ", todo.tag), 
+          React.createElement("p", {className: "liText"}, React.createElement("strong", null, checkCompleted(todo))), 
+          React.createElement("p", {className: "liText"}, React.createElement(CompleteTodoButton, {todo: todo, onTodoUpdate: this.props.onTodoUpdate})), 
+          React.createElement("p", {className: "liText"}, React.createElement(DeleteTodoButton, {todo: todo, onTodoDelete: this.props.onTodoDelete}))
         )
       )
     );
@@ -196,7 +171,11 @@ module.exports = React.createClass({displayName: "exports",
       React.createElement("ul", {className: "Todos"}, 
         reversedList.map(function(todo) {
           return (
-            React.createElement(SingleTodo, {todo: todo, onTodoUpdate: updateTodo, onTodoDelete: deleteTodo})
+            React.createElement(SingleTodo, {
+              todo: todo, 
+              onTodoUpdate: updateTodo, 
+              onTodoDelete: deleteTodo}
+            )
           );
         })
       )
@@ -252,7 +231,11 @@ module.exports.default = TodoListApp = React.createClass({displayName: "TodoList
         React.createElement("section", {className: "completedColumn"}, 
           React.createElement("h3", null, "Completed Todos")
         ), 
-        React.createElement(TodoList, {data: this.state.data, onTodoUpdate: this.handleTodoUpdate, onTodoDelete: this.handleTodoDelete})
+        React.createElement(TodoList, {
+          data: this.state.data, 
+          onTodoUpdate: this.handleTodoUpdate, 
+          onTodoDelete: this.handleTodoDelete}
+        )
       )
     );
   }

@@ -7,8 +7,7 @@ module.exports = React.createClass({
     this.props.onTodoUpdate({id: e.target.name});
   },
   render: function() {
-    var todo = this.props.todo;
-    var id = todo.id;
+    var id = this.props.todo.id;
     return (
         <input
           type="Submit"

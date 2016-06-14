@@ -13,7 +13,11 @@ module.exports = React.createClass({
       <ul className="Todos">
         {reversedList.map(function(todo) {
           return (
-            <SingleTodo todo={todo} onTodoUpdate={updateTodo} onTodoDelete={deleteTodo}/>
+            <SingleTodo
+              todo={todo}
+              onTodoUpdate={updateTodo}
+              onTodoDelete={deleteTodo}
+            />
           );
         })}
       </ul>

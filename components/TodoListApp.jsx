@@ -45,7 +45,11 @@ module.exports.default = TodoListApp = React.createClass({
         <section className="completedColumn">
           <h3>Completed Todos</h3>
         </section>
-        <TodoList data={this.state.data} onTodoUpdate={this.handleTodoUpdate} onTodoDelete={this.handleTodoDelete}/>
+        <TodoList
+          data={this.state.data}
+          onTodoUpdate={this.handleTodoUpdate}
+          onTodoDelete={this.handleTodoDelete}
+        />
       </div>
     );
   }
