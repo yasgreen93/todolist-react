@@ -6,15 +6,15 @@
         "completed": true
     },
     {
-        "id": 1.4,
-        "text": "Make lunch",
-        "tag": "food",
-        "completed": false
-    },
-    {
         "id": 2.8,
         "text": "Tidy room",
         "tag": "chore",
         "completed": true
+    },
+    {
+        "id": 4.2,
+        "text": "Make lunch",
+        "tag": "food",
+        "completed": false
     }
 ]

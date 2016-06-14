@@ -214,82 +214,37 @@ var TodoList = require('./TodoList.jsx');
 
 module.exports.default = TodoListApp = React.createClass({displayName: "TodoListApp",
   loadTodosFromServer: function() {
-    $.ajax({
-      url: this.props.url, dataType: 'json', cache: false,
-      success: function(data) {
-        this.setState({data: data})
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
+    this.callAjax("getTodos", this.props.url, "GET")
+    // $.ajax({
+    //   url: this.props.url, dataType: 'json', cache: false,
+    //   success: function(data) {
+    //     this.setState({data: data})
+    //   }.bind(this),
+    //   error: function(xhr, status, err) {
+    //     console.error(this.props.url, status, err.toString());
+    //   }.bind(this)
+    // });
   },
   handleTodoSubmit: function(todo) {
     var todos = this.state.data;
     var newTodos = todos.concat([todo]);
     this.setState({data: newTodos});
-    var reqData = todo;
-    this.callAjax(reqData, this.props.url)
-    // $.ajax({
-    //   url: this.props.url,
-    //   dataType: 'json',
-    //   type: 'POST',
-    //   data: todo,
-    //   success: function(data) {
-    //     this.setState({data: data});
-    //   }.bind(this),
-    //   error: function(xhr, status, err) {
-    //     this.setState({data: todos});
-    //     console.error(this.props.url, status, err.toString());
-    //   }.bind(this)
-    // });
+    this.callAjax(todo, this.props.url, "POST")
   },
   handleTodoUpdate: function(id) {
-    // var todos = this.state.data;
-    var reqId = id
-    this.callAjax(reqId, this.props.updateUrl)
-    //  $.ajax({
-    //   url: this.props.updateUrl,
-    //   dataType: 'json',
-    //   type: 'POST',
-    //   data: id,
-    //   success: function(data) {
-    //     this.setState({data: data});
-    //   }.bind(this),
-    //   error: function(xhr, status, err) {
-    //     this.setState({data: todos});
-    //     console.error(this.props.url, status, err.toString());
-    //   }.bind(this)
-    // });
+    this.callAjax(id, this.props.updateUrl, "POST")
   },
   handleTodoDelete: function(id) {
-    // var todos = this.state.data;
-    var reqId = id
-    this.callAjax(reqId, this.props.deleteUrl)
-    //  $.ajax({
-    //   url: this.props.deleteUrl, dataType: 'json',
-    //   type: 'POST', data: id,
-    //   success: function(data) {
-    //     this.setState({data: data});
-    //   }.bind(this),
-    //   error: function(xhr, status, err) {
-    //     this.setState({data: todos});
-    //     console.error(this.props.url, status, err.toString());
-    //   }.bind(this)
-    // });
+    this.callAjax(id, this.props.deleteUrl, "POST")
   },
-  callAjax: function(reqData, url) {
-    var todos = this.state.data;
+  callAjax: function(reqData, url, reqType) {
     $.ajax({
-      url: url,
-      dataType: 'json',
-      type: 'POST',
-      data: reqData,
+      url: url, dataType: 'json', type: reqType, data: reqData,
       success: function(data) {
         this.setState({data: data});
       }.bind(this),
       error: function(xhr, status, err) {
-        this.setState({data: todos});
+        this.setState({data: this.state.data});
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
