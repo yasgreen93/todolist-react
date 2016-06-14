@@ -16,6 +16,18 @@ body {
   z-index: 1;
 }
 
+.completedColumn {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  width: 40%;
+  height: 600px;
+  left: 35%;
+  color: #FF8500;
+  background-color: #FFF;
+  border-radius: 5px;
+}
+
 div {
   margin: 10px;
 }
@@ -28,13 +40,13 @@ div {
 
 .fixedHeader {
   position: fixed;
-  left: -2px;
   top: -10px;
   border-radius: 3px;
   width: 430px;
-  height: 110px;
-  padding: 20px;
+  height: 120px;
+  padding: 10px;
   background-color: #c9e5ee;
+  /*background-color: blue;*/
   z-index: 1;
 }
 
@@ -44,7 +56,10 @@ form {
 
 ul {
   position: relative;
-  top: 98px;
+  display: inline-block;
+  float: left;
+  top: 80px;
+  left: 10px;
   padding-left: 0px;
   z-index: 0;
 }
@@ -58,7 +73,7 @@ li {
   padding-left: 8px;
   margin: 10px 0px;
   color: #FFF;
-  max-width: 250px;
+  width: 250px;
   text-align: center;
 }
 

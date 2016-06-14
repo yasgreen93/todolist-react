@@ -278,9 +278,12 @@ module.exports.default = TodoListApp = React.createClass({displayName: "TodoList
   render: function() {
     return (
       React.createElement("div", {className: "TodoTable"}, 
-        React.createElement("div", {className: "fixedHeader"}, 
+        React.createElement("section", {className: "fixedHeader"}, 
           React.createElement("h2", {id: "pageHeader"}, "Todo List!"), 
           React.createElement(AddTodo, {onTodoSubmit: this.handleTodoSubmit})
+        ), 
+        React.createElement("section", {className: "completedColumn"}, 
+          React.createElement("h3", null, "Completed Todos")
         ), 
         React.createElement(TodoList, {data: this.state.data, onTodoUpdate: this.handleTodoUpdate, onTodoDelete: this.handleTodoDelete})
       )

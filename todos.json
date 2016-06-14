@@ -1,26 +1,20 @@
 [
     {
         "id": 0.7,
-        "text": "Wash car",
-        "tag": "chore",
+        "text": "Walk dog",
+        "tag": "dog",
         "completed": false
     },
     {
         "id": 1.4,
-        "text": "Make packed lunch",
-        "tag": "food",
-        "completed": false
-    },
-    {
-        "id": 5.6,
-        "text": "Tidy room",
+        "text": "Tidy bedroom",
         "tag": "chore",
         "completed": false
     },
     {
-        "id": 8.4,
-        "text": "Go for a walk",
-        "tag": "leisure",
-        "completed": false
+        "id": 2.8,
+        "text": "Make lunch",
+        "tag": "food",
+        "completed": true
     }
 ]
