@@ -3,18 +3,18 @@
         "id": 0.7,
         "text": "Walk dog",
         "tag": "dog",
-        "completed": false
+        "completed": true
     },
     {
         "id": 1.4,
-        "text": "Tidy bedroom",
-        "tag": "chore",
+        "text": "Make lunch",
+        "tag": "food",
         "completed": false
     },
     {
         "id": 2.8,
-        "text": "Make lunch",
-        "tag": "food",
+        "text": "Tidy room",
+        "tag": "chore",
         "completed": true
     }
 ]

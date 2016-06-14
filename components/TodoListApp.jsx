@@ -17,37 +17,24 @@ module.exports.default = TodoListApp = React.createClass({
     var todos = this.state.data;
     var newTodos = todos.concat([todo]);
     this.setState({data: newTodos});
-    $.ajax({
-      url: this.props.url, dataType: 'json',
-      type: 'POST', data: todo,
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        this.setState({data: todos});
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
+    var reqData = todo;
+    this.callAjax(reqData, this.props.url)
   },
   handleTodoUpdate: function(id) {
-    var todos = this.state.data;
-     $.ajax({
-      url: this.props.updateUrl, dataType: 'json',
-      type: 'POST', data: id,
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        this.setState({data: todos});
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
+    var reqId = id
+    this.callAjax(reqId, this.props.updateUrl)
   },
   handleTodoDelete: function(id) {
+    var reqId = id
+    this.callAjax(reqId, this.props.deleteUrl)
+  },
+  callAjax: function(reqData, url) {
     var todos = this.state.data;
-     $.ajax({
-      url: this.props.deleteUrl, dataType: 'json',
-      type: 'POST', data: id,
+    $.ajax({
+      url: url,
+      dataType: 'json',
+      type: 'POST',
+      data: reqData,
       success: function(data) {
         this.setState({data: data});
       }.bind(this),
